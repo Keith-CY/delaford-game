@@ -33,6 +33,24 @@ Now, while still inside the `game` folder, open another terminal session in that
 
 Now you may visit `http://localhost:8080` to login and start developing!
 
+## Docker / Coolify Deployment
+
+This repository targets **Node 10** and uses `node-sass@4`, so container builds need a build toolchain.
+
+A `Dockerfile` is included (in this fork) for one-click deployment on Coolify.
+
+### Runtime port
+
+The game server listens on `PORT` (default `6500`). In Coolify, expose that container port.
+
+### Run locally with Docker
+
+```bash
+docker build -t delaford-game .
+docker run --rm -p 6500:6500 -e PORT=6500 delaford-game
+# open http://localhost:6500
+```
+
 For a better time, make sure to join the [Discord channel](https://discord.gg/nkZnHvD) to talk to other developers for help and exclusive dicussions!
 
 > Please be aware of a [possible scam in regards to Delaford](https://github.com/delaford/game#possible-scam-notice) that promises money for testing or similar action.
