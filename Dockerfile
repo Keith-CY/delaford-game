@@ -8,8 +8,11 @@ FROM node:10-buster
 
 WORKDIR /app
 
-# Build deps for node-sass and other native modules
-RUN apt-get update \
+# Build deps for node-sass and other native modules.
+# Debian buster is EOL; default mirrors may 404. Switch to archive.debian.org.
+RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list \
+  && sed -i 's|security.debian.org|archive.debian.org|g' /etc/apt/sources.list \
+  && apt-get -o Acquire::Check-Valid-Until=false update \
   && apt-get install -y --no-install-recommends python2 make g++ \
   && rm -rf /var/lib/apt/lists/*
 
